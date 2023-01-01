@@ -1,4 +1,4 @@
-import opensky.api.OpenSkyApi;
+import org.opensky.api.OpenSkyApi;
 import org.opensky.model.OpenSkyStates;
 import org.opensky.model.StateVector;
 
