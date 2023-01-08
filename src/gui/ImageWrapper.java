@@ -7,25 +7,72 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageWrapper {
-    private final BufferedImage _oImage;
-    private final int _oWidth;
-    private final int _oHeight;
+    private final BufferedImage _originalImage;
+    private final int _originalWidth;
+    private final int _originalHeight;
+
+    private BufferedImage _currentImage;
+    private int _currentWidth;
+    private int _currentHeight;
 
     public ImageWrapper(String pPath) throws IOException {
-        _oImage = ImageIO.read(new File(pPath));
-        _oWidth = _oImage.getWidth();
-        _oHeight = _oImage.getHeight();
+        _originalImage = ImageIO.read(new File(pPath));
+        _originalWidth = _originalImage.getWidth();
+        _originalHeight = _originalImage.getHeight();
+
+        this._iResize(_originalWidth, _originalHeight);
     }
 
-    public Image GetResized(int pNewWidth, int pNewHeight) {
-        return _oImage.getScaledInstance(pNewWidth, pNewHeight, Image.SCALE_DEFAULT);
+    private static BufferedImage toBufferedImage(Image img) {
+        if (img instanceof BufferedImage) {
+            return (BufferedImage) img;
+        }
+
+        // Create a buffered image with transparency
+        BufferedImage bImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+        // Draw the image on to the buffered image
+        Graphics2D bGr = bImage.createGraphics();
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
+
+        // Return the buffered image
+        return bImage;
     }
 
-    public int GetWidth() {
-        return _oWidth;
+    private void _iResize(int pNewWidth, int pNewHeight) {
+        _currentImage = toBufferedImage(_originalImage.getScaledInstance(pNewWidth, pNewHeight, Image.SCALE_DEFAULT));
+        _currentWidth = pNewWidth;
+        _currentHeight = pNewHeight;
     }
 
-    public int GetHeight() {
-        return _oHeight;
+    public ImageWrapper Resize(int pNewWidth, int pNewHeight) {
+        _iResize(pNewWidth, pNewHeight);
+
+        return this;
+    }
+
+    public Image GetOriginalImage() {
+        return _originalImage;
+    }
+
+    public int GetOriginalWidth() {
+        return _originalWidth;
+    }
+
+    public int GetOriginalHeight() {
+        return _originalHeight;
+    }
+
+    public Image GetCurrentImage() {
+        return _currentImage;
+    }
+
+    public int GetCurrentWidth() {
+        return _currentWidth;
+    }
+
+    public int GetCurrentHeight() {
+        return _currentHeight;
     }
 }

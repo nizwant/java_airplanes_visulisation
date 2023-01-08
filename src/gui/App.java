@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Objects;
 
 public class App extends JFrame implements ActionListener {
@@ -43,6 +44,14 @@ public class App extends JFrame implements ActionListener {
         this.setTitle("JAVA Project");
         this.setResizable(false);
         this.setContentPane(_contentPane);
+        ImageWrapper img;
+        try {
+            img = new ImageWrapper(Constants.RESOURCES_PATH + "/logo@icon.png");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        img.Resize(16, 16);
+        this.setIconImage(img.GetCurrentImage());
     }
 
     private void AddActionListenerToButtons() {
@@ -58,6 +67,7 @@ public class App extends JFrame implements ActionListener {
         ComponentPlacement.PlaceComponentSmart(_navigationGroup, PlainLayout.RIGHT, PlainLayout.TOP);
 //        _navigationGroup.setBackground(new Color(0x123789));
         _navigationGroup.setLayout(null);
+        _navigationGroup.setBackground(new Color(0, 0, 0, 0));
 
         _contentPane.add(_navigationGroup);
     }
@@ -69,6 +79,7 @@ public class App extends JFrame implements ActionListener {
 
     private void ManageContentPane() {
         _contentPane.setBounds(0, 0, _contentPane.getWidth(), _contentPane.getHeight());
+//        _contentPane.setPreferredSize(new Dimension(_mapOrganiser.GetWidth(), _mapOrganiser.GetWidth()));
         _contentPane.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         _contentPane.setLayout(null);
 

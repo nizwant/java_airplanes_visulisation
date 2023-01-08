@@ -5,6 +5,7 @@ import constants.Constants;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ButtonsFormation {
@@ -25,6 +26,7 @@ public class ButtonsFormation {
         this.SetButtonsSizes();
         this.SetButtonsPositions();
         this.NameButtons();
+        this.SetButtonsImages();
     }
 
     private void Initialize() {
@@ -79,6 +81,29 @@ public class ButtonsFormation {
         _resetPos.setName(ActionPerformed.RESET_POS.getValue());
         _zoomIn.setName(ActionPerformed.ZOOM_IN.getValue());
         _zoomOut.setName(ActionPerformed.ZOOM_OUT.getValue());
+    }
+
+    private void SetButtonsImages() {
+        this.SetButtonImage(_moveToNorth, "collapse-arrow.png");
+        this.SetButtonImage(_moveToSouth, "expand-arrow.png");
+        this.SetButtonImage(_moveToWest, "back.png");
+        this.SetButtonImage(_moveToEast, "forward.png");
+        this.SetButtonImage(_resetPos, "location-off.png");
+        this.SetButtonImage(_zoomIn, "zoom-in.png");
+        this.SetButtonImage(_zoomOut, "zoom-out.png");
+    }
+
+    private void SetButtonImage(JButton pButton, String pIconName) {
+        ImageWrapper img;
+
+        try {
+            img = new ImageWrapper(Constants.RESOURCES_PATH + "/icons/" + pIconName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        img.Resize(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT);
+        pButton.setIcon(new ImageIcon(img.GetCurrentImage()));
     }
 
     public void AddOneActionListenerToAllButtons(ActionListener pActionListenerImpl) {

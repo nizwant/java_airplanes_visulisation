@@ -15,4 +15,6 @@ public class Constants {
     public static int INIT_MAP_POS_Y = 0;
 
     public static String RESOURCES_PATH = "./resources";
+
+    public static int ZOOM_IN_COUNT_LIMIT = 5;
 }
