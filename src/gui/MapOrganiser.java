@@ -89,17 +89,17 @@ public class MapOrganiser {
 
         // change position, scale and move step
 
-        double prevScale = _mapScale;
         _mapScale *= (100 + Constants.SCALE_BOOST) / 100;
 
-        int deltaX = (int) ((double) Constants.WINDOW_WIDTH / 2.0 * (1 / prevScale - 1 / _mapScale));
-        int deltaY = (int) ((double) Constants.WINDOW_WIDTH / 2.0 * (1 / prevScale - 1 / _mapScale));
+        _mapXPos *= (100 + Constants.SCALE_BOOST) / 100;
+        _mapYPos *= (100 + Constants.SCALE_BOOST) / 100;
 
-        int newDeltaX = (_mapXPos < 0 ? -_mapXPos : _mapXPos) + deltaX;
-        int newDeltaY = (_mapYPos < 0 ? -_mapYPos : _mapYPos) + deltaY;
-
-        _mapXPos = (int) ((double) -newDeltaX * _mapScale);
-        _mapYPos = (int) ((double) -newDeltaY * _mapScale);
+        // I know it can be simplified, but simplified version is not clear enough to quickly understand how
+        // formula works
+        // _mapXPos -= (int) ((double) Constants.WINDOW_WIDTH * Constants.SCALE_BOOST / 100 * 0.5);
+        // _mapYPos -= (int) ((double) Constants.WINDOW_HEIGHT * Constants.SCALE_BOOST / 100 * 0.5);
+        _mapXPos -= (int) ((double) Constants.WINDOW_WIDTH * ((100 + Constants.SCALE_BOOST) / 100 - 1.0) * 0.5);
+        _mapYPos -= (int) ((double) Constants.WINDOW_HEIGHT * ((100 + Constants.SCALE_BOOST) / 100 - 1.0) * 0.5);
 
         this.ScaleMap();
     }
@@ -116,6 +116,16 @@ public class MapOrganiser {
         _zoomInClickedCounter--;
 
         // change position, scale and move step
+
+        // I know it can be simplified, but simplified version is not clear enough to quickly understand how
+        // formula works
+        // _mapXPos += (int) ((double) Constants.WINDOW_WIDTH * Constants.SCALE_BOOST / 100 * 0.5);
+        // _mapYPos += (int) ((double) Constants.WINDOW_HEIGHT * Constants.SCALE_BOOST / 100 * 0.5);
+        _mapXPos += (int) ((double) Constants.WINDOW_WIDTH * ((100 + Constants.SCALE_BOOST) / 100 - 1.0) * 0.5);
+        _mapYPos += (int) ((double) Constants.WINDOW_HEIGHT * ((100 + Constants.SCALE_BOOST) / 100 - 1.0) * 0.5);
+
+        _mapXPos /= (100 + Constants.SCALE_BOOST) / 100;
+        _mapYPos /= (100 + Constants.SCALE_BOOST) / 100;
 
         _mapScale /= (100 + Constants.SCALE_BOOST) / 100;
 
