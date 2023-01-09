@@ -7,12 +7,11 @@ import java.awt.*;
 import java.io.IOException;
 
 public class MapOrganiser {
-    private final JLabel _map;
     private final ImageWrapper _image;
+    private final JLabel _map;
     private double _mapScale;
     private int _mapXPos;
     private int _mapYPos;
-    private int _mapMoveStep;
     private int _zoomInClickedCounter;
 
     public MapOrganiser() {
@@ -30,39 +29,37 @@ public class MapOrganiser {
     public void MoveToNorthCalled() {
         System.out.println("move to north called");
 
-        _mapYPos += _mapMoveStep;
+        _mapYPos += Constants.MAP_MOVE_STEP;
 
         // do not let move out of map
-        if (_mapYPos > 0) _mapYPos = 0;
+        this.MapCalibration();
     }
 
     public void MoveToSouthCalled() {
         System.out.println("move to south called");
 
-        _mapYPos -= _mapMoveStep;
+        _mapYPos -= Constants.MAP_MOVE_STEP;
 
         // do not let move out of map
-        int delta = _image.GetCurrentHeight() - Constants.WINDOW_HEIGHT;
-        if (_mapYPos < -delta) _mapYPos = -delta;
+        this.MapCalibration();
     }
 
     public void MoveToWestCalled() {
         System.out.println("move to west called");
 
-        _mapXPos += _mapMoveStep;
+        _mapXPos += Constants.MAP_MOVE_STEP;
 
         // do not let move out of map
-        if (_mapXPos > 0) _mapXPos = 0;
+        this.MapCalibration();
     }
 
     public void MoveToEastCalled() {
         System.out.println("move to east called");
 
-        _mapXPos -= _mapMoveStep;
+        _mapXPos -= Constants.MAP_MOVE_STEP;
 
         // do not let move out of map
-        int delta = _image.GetCurrentWidth() - Constants.WINDOW_WIDTH;
-        if (_mapXPos < -delta) _mapXPos = -delta;
+        this.MapCalibration();
     }
 
     public void ResetPosCalled() {
@@ -71,9 +68,11 @@ public class MapOrganiser {
         _mapScale = Constants.INIT_SCALE;
         _mapXPos = Constants.INIT_MAP_POS_X;
         _mapYPos = Constants.INIT_MAP_POS_Y;
-        _mapMoveStep = Constants.INIT_MOVE_STEP;
         _zoomInClickedCounter = 0;
-        this.ScaleMap();
+
+        this.RescaleMap();
+
+        this.MapCalibration();
     }
 
     public void ZoomInCalled() {
@@ -101,7 +100,9 @@ public class MapOrganiser {
         _mapXPos -= (int) ((double) Constants.WINDOW_WIDTH * ((100 + Constants.SCALE_BOOST) / 100 - 1.0) * 0.5);
         _mapYPos -= (int) ((double) Constants.WINDOW_HEIGHT * ((100 + Constants.SCALE_BOOST) / 100 - 1.0) * 0.5);
 
-        this.ScaleMap();
+        this.RescaleMap();
+
+        this.MapCalibration();
     }
 
     public void ZoomOutCalled() {
@@ -129,7 +130,9 @@ public class MapOrganiser {
 
         _mapScale /= (100 + Constants.SCALE_BOOST) / 100;
 
-        this.ScaleMap();
+        this.RescaleMap();
+
+        this.MapCalibration();
     }
 
     public void PinMap(Container pCon) {
@@ -142,12 +145,24 @@ public class MapOrganiser {
         _map.setBounds(_mapXPos, _mapYPos, _map.getWidth(), _map.getHeight());
     }
 
-    private void ScaleMap() {
+    private void RescaleMap() {
         int newWidth = (int) ((double) _image.GetOriginalWidth() * _mapScale);
         int newHeight = (int) ((double) _image.GetOriginalHeight() * _mapScale);
 
         ImageIcon icon = new ImageIcon(_image.Resize(newWidth, newHeight).GetCurrentImage());
         _map.setSize(new Dimension(newWidth, newHeight));
         _map.setIcon(icon);
+    }
+
+    private void MapCalibration() {
+        int deltaX = _image.GetCurrentWidth() - Constants.WINDOW_WIDTH;
+        if (_mapXPos < -deltaX) _mapXPos = -deltaX;
+
+        if (_mapXPos > 0) _mapXPos = 0;
+
+        int deltaY = _image.GetCurrentHeight() - Constants.WINDOW_HEIGHT;
+        if (_mapYPos < -deltaY) _mapYPos = -deltaY;
+
+        if (_mapYPos > 0) _mapYPos = 0;
     }
 }
