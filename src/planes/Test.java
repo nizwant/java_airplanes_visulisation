@@ -22,7 +22,7 @@ public class Test {
         for (Plane modPlane: modified_list_of_planes)
         {
             System.out.println(modPlane);
-            System.out.println(modPlane.getLatitude()+5);
+            System.out.println(modPlane.GetLatitude()+5);
             System.out.println(modPlane.getOrigin_country());
         }
 

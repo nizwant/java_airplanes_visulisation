@@ -103,11 +103,11 @@ public class Plane {
         return last_contact;
     }
 
-    public float getLongitude() {
+    public float GetLongitude() {
         return longitude;
     }
 
-    public float getLatitude() {
+    public float GetLatitude() {
         return latitude;
     }
 
