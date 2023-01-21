@@ -10,7 +10,7 @@ public class Constants {
     public static double SCALE_BOOST = 50; // %
     public static int MAP_MOVE_STEP = 100; // flat
 
-    public static int INIT_SCALE = 1;
+    public static double INIT_SCALE = 0.1955;
     public static int INIT_MAP_POS_X = 0;
     public static int INIT_MAP_POS_Y = 0;
 

@@ -16,7 +16,7 @@ public class MapOrganiser {
 
     public MapOrganiser() {
         try {
-            _image = new ImageWrapper(Constants.RESOURCES_PATH + "/map@pic.jpg");
+            _image = new ImageWrapper(Constants.RESOURCES_PATH + "/satellite.png");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
