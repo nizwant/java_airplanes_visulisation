@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) throws IOException {
+
         ArrayList<String[]> list_of_planes = get_data_about_planes_above_poland.refresh();
         List<Plane> modified_list_of_planes= new ArrayList<>();
 

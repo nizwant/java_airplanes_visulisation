@@ -1,5 +1,6 @@
 package planes;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -67,6 +68,19 @@ public class Plane {
                 ", spi=" + spi +
                 ", position_source=" + position_source +
                 '}';
+    }
+
+    public static List<Plane> get_newest_plane_list() throws IOException {
+        
+        ArrayList<String[]> list_of_planes = get_data_about_planes_above_poland.refresh();
+        List<Plane> modified_list_of_planes= new ArrayList<>();
+
+        for (String[] plane : list_of_planes) {
+            Plane modified_Plane = new Plane(plane);
+            modified_list_of_planes.add(modified_Plane);
+        }
+
+        return modified_list_of_planes;
     }
 
     public String getIcao24() {
@@ -137,71 +151,5 @@ public class Plane {
         return position_source;
     }
 
-    public void setIcao24(String icao24) {
-        this.icao24 = icao24;
-    }
 
-    public void setCallsign(String callsign) {
-        this.callsign = callsign;
-    }
-
-    public void setOrigin_country(String origin_country) {
-        this.origin_country = origin_country;
-    }
-
-    public void setTime_position(int time_position) {
-        this.time_position = time_position;
-    }
-
-    public void setLast_contact(int last_contact) {
-        this.last_contact = last_contact;
-    }
-
-    public void setLongitude(float longitude) {
-        this.longitude = longitude;
-    }
-
-    public void setLatitude(float latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setBaro_altitude(float baro_altitude) {
-        this.baro_altitude = baro_altitude;
-    }
-
-    public void setOn_ground(boolean on_ground) {
-        this.on_ground = on_ground;
-    }
-
-    public void setVelocity(float velocity) {
-        this.velocity = velocity;
-    }
-
-    public void setTrue_track(float true_track) {
-        this.true_track = true_track;
-    }
-
-    public void setVertical_rate(float vertical_rate) {
-        this.vertical_rate = vertical_rate;
-    }
-
-    public void setSensors(int[] sensors) {
-        this.sensors = sensors;
-    }
-
-    public void setGeo_altitude(float geo_altitude) {
-        this.geo_altitude = geo_altitude;
-    }
-
-    public void setSquawk(String squawk) {
-        this.squawk = squawk;
-    }
-
-    public void setSpi(boolean spi) {
-        this.spi = spi;
-    }
-
-    public void setPosition_source(int position_source) {
-        this.position_source = position_source;
-    }
 }
