@@ -3,6 +3,7 @@ package gui;
 import constants.ActionPerformed;
 import constants.Constants;
 import constants.PlainLayout;
+import gui.dynamic.tmpName;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,9 +15,13 @@ import java.util.Objects;
 public class App extends JFrame implements ActionListener {
     Container _contentPane;
     JPanel _navigationGroup;
+    JPanel _planesGroup;
 
     ButtonsFormation _buttonsFormation;
     MapOrganiser _mapOrganiser;
+
+    tmpName _tmp;
+    Thread _thr;
 
     public App() {
         this.Initialise();
@@ -26,9 +31,13 @@ public class App extends JFrame implements ActionListener {
         this.PlaceButtonsInNavigationGroup();
 
         this.ManageNavigationGroup();
+        this.ManagePlanesGroup();
         this.ManageMap();
         this.ManageContentPane();
+
+        _thr.start();
     }
+
 
     private void Initialise() {
         _contentPane = this.getContentPane();
@@ -36,6 +45,9 @@ public class App extends JFrame implements ActionListener {
 
         _buttonsFormation = new ButtonsFormation();
         _mapOrganiser = new MapOrganiser();
+
+        _tmp = new tmpName();
+        _thr = new Thread(_tmp);
     }
 
     private void StartUp() {
@@ -65,21 +77,23 @@ public class App extends JFrame implements ActionListener {
     private void ManageNavigationGroup() {
         _navigationGroup.setSize(new Dimension(Constants.BUTTON_WIDTH * 3, Constants.BUTTON_HEIGHT * 6));
         ComponentPlacement.PlaceComponentSmart(_navigationGroup, PlainLayout.RIGHT, PlainLayout.TOP);
-//        _navigationGroup.setBackground(new Color(0x123789));
         _navigationGroup.setLayout(null);
         _navigationGroup.setBackground(new Color(0, 0, 0, 0));
 
         _contentPane.add(_navigationGroup);
     }
 
+    private void ManagePlanesGroup() {
+        _contentPane.add(_planesGroup);
+    }
+
     private void ManageMap() {
-        _mapOrganiser.PinMap(_contentPane);
+        _mapOrganiser.PinTo(_contentPane);
         _mapOrganiser.DrawMap();
     }
 
     private void ManageContentPane() {
         _contentPane.setBounds(0, 0, _contentPane.getWidth(), _contentPane.getHeight());
-//        _contentPane.setPreferredSize(new Dimension(_mapOrganiser.GetWidth(), _mapOrganiser.GetWidth()));
         _contentPane.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         _contentPane.setLayout(null);
 

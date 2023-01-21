@@ -16,7 +16,7 @@ public class MapOrganiser {
 
     public MapOrganiser() {
         try {
-            _image = new ImageWrapper(Constants.RESOURCES_PATH + "/map@pic.jpg");
+            _image = new ImageWrapper(Constants.RESOURCES_PATH + "/" + Constants.MAP_NAME);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -135,7 +135,7 @@ public class MapOrganiser {
         this.MapCalibration();
     }
 
-    public void PinMap(Container pCon) {
+    public void PinTo(Container pCon) {
         pCon.add(_map);
     }
 
