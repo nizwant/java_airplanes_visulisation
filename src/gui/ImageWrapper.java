@@ -1,5 +1,7 @@
 package gui;
 
+import constants.Constants;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -41,7 +43,7 @@ public class ImageWrapper {
     }
 
     private void _iResize(int pNewWidth, int pNewHeight) {
-        _currentImage = toBufferedImage(_originalImage.getScaledInstance(pNewWidth, pNewHeight, Image.SCALE_DEFAULT));
+        _currentImage = toBufferedImage(_originalImage.getScaledInstance(pNewWidth, pNewHeight, Constants.MAP_SCALING_ALGORITHM));
         _currentWidth = pNewWidth;
         _currentHeight = pNewHeight;
     }
