@@ -9,10 +9,8 @@ import javax.swing.*;
 
 import java.awt.*;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class InterMng {
     private final JPanel _panel;
@@ -59,25 +57,22 @@ public class InterMng {
 
             // setting position
             int posX, posY;
-            if (Constants.USE_TEST_DATA) {
-                posX = ThreadLocalRandom.current().nextInt(0, Constants.WINDOW_WIDTH - Constants.PLANE_RADIO_BUTTON_WIDTH + 1);
-                posY = ThreadLocalRandom.current().nextInt(0, Constants.WINDOW_HEIGHT - Constants.PLANE_RADIO_BUTTON_HEIGHT + 1);
+
+            double lb, rb, tb, bb;
+            if (Constants.USER_POLAND_S_MAP_BOUNDS) {
+                lb = Constants.POLAND_THE_WESTERNMOST_POINT_LONGITUDE;
+                rb = Constants.POLAND_THE_EASTERNMOST_POINT_LONGITUDE;
+                tb = Constants.POLAND_THE_NORTHERNMOST_POINT_LATITUDE;
+                bb = Constants.POLAND_THE_SOUTHERNMOST_POINT_LATITUDE;
             } else {
-                double lb, rb, tb, bb;
-                if (Constants.USER_POLAND_S_MAP_BOUNDS) {
-                    lb = Constants.POLAND_THE_WESTERNMOST_POINT_LATITUDE;
-                    rb = Constants.POLAND_THE_EASTERNMOST_POINT_LATITUDE;
-                    tb = Constants.POLAND_THE_NORTHERNMOST_POINT_LONGITUDE;
-                    bb = Constants.POLAND_THE_SOUTHERNMOST_POINT_LONGITUDE;
-                } else {
-                    lb = Constants.LEFT_BORDER_LONGITUDE;
-                    rb = Constants.RIGHT_BORDER_LONGITUDE;
-                    tb = Constants.TOP_BORDER_LATITUDE;
-                    bb = Constants.BOTTOM_BORDER_LATITUDE;
-                }
-                posX = (int) ((obj.GetLongitude() - lb) / (rb - lb) * _panel.getWidth());
-                posY = (int) ((tb - obj.GetLatitude()) / (tb - bb) * _panel.getHeight());
+                lb = Constants.LEFT_BORDER_LONGITUDE;
+                rb = Constants.RIGHT_BORDER_LONGITUDE;
+                tb = Constants.TOP_BORDER_LATITUDE;
+                bb = Constants.BOTTOM_BORDER_LATITUDE;
             }
+            posX = (int) ((obj.GetLongitude() - lb) / (rb - lb) * _panel.getWidth());
+            posY = (int) ((tb - obj.GetLatitude()) / (tb - bb) * _panel.getHeight());
+
             radio.setBounds(posX, posY, radio.getWidth(), radio.getHeight());
 
             _panel.add(radio);
