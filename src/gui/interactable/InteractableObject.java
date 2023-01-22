@@ -1,7 +1,5 @@
 package gui.interactable;
 
-import constants.Constants;
-import gui.ImageWrapper;
 import planes.Airport;
 import planes.PlaceableObject;
 import planes.Plane;
@@ -12,10 +10,9 @@ import javax.swing.JLabel;
 
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
-import java.io.IOException;
 
 public class InteractableObject extends JButton {
-    private PlaceableObject _data;
+    private final PlaceableObject _data;
 
     public InteractableObject(PlaceableObject pData) {
         this._data = pData;
@@ -32,24 +29,24 @@ public class InteractableObject extends JButton {
         // make it visible
         frame.setVisible(true);
         // set title depending on type of browsing object
-        String name = "Info about ";
-        if (src._data instanceof Plane) name += "plane";
-        else if (src._data instanceof Airport) name += "airport";
-        frame.setTitle(name + " #");
+        String name = "";
+        if (src._data instanceof Plane) name += "Plane";
+        else if (src._data instanceof Airport) name += "Airport";
+        frame.setTitle(name + " #" + src._data.GetName());
         // forbid resize
         frame.setResizable(false);
 
         // get content pane reference
         var contentPane = frame.getContentPane();
         // set its size
-        contentPane.setPreferredSize(new Dimension(200, 300));
+        contentPane.setPreferredSize(new Dimension(400, 300));
         // set its position
         contentPane.setBounds(0, 0, contentPane.getWidth(), contentPane.getHeight());
 
         // create label
         JLabel label = new JLabel();
         // set inner text
-        label.setText(src._data.toString());
+        label.setText(src._data.GetDataBeautified());
 
         // add text to content pane
         contentPane.add(label);

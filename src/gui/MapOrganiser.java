@@ -3,8 +3,11 @@ package gui;
 import constants.Constants;
 import interfaces.Pinnable;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+
+import java.awt.Dimension;
+import java.awt.Container;
 import java.io.IOException;
 
 public class MapOrganiser implements Pinnable {

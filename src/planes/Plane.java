@@ -102,6 +102,16 @@ public class Plane extends PlaceableObject {
         return latitude;
     }
 
+    @Override
+    public String GetName() {
+        return null;
+    }
+
+    @Override
+    public String GetDataBeautified() {
+        return null;
+    }
+
     public float getBaro_altitude() {
         return baro_altitude;
     }

@@ -16,11 +16,11 @@ public class DynamicPlacement implements Runnable {
             _appRef.LoadPlanes();
             _appRef.Refresh();
 
-//            System.out.println("working");
-//            var content = _appRef.getContentPane();
-//            for (var comp : content.getComponents()) {
-//                System.out.println(comp);
-//            }
+            var content = _appRef.getContentPane();
+            for (var comp : content.getComponents()) {
+                System.out.println(comp);
+            }
+            System.out.println();
 
             try {
                 Thread.sleep(Constants.REFRESH_DELAY_IN_SECONDS * 1000L);
