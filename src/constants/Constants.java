@@ -9,6 +9,11 @@ public class Constants {
     public static int BUTTON_WIDTH = 50;
     public static int BUTTON_HEIGHT = 50;
 
+    public static int PLANE_RADIO_BUTTON_WIDTH = 50;
+    public static int PLANE_RADIO_BUTTON_HEIGHT = 50;
+
+    public static Color TRANSPARENT = new Color(0, 0, 0, 0);
+
     public static double SCALE_BOOST = 50; // %
     public static int MAP_MOVE_STEP = 100; // flat
 
@@ -23,10 +28,17 @@ public class Constants {
 
     public static int ZOOM_IN_COUNT_LIMIT = 5;
 
-    public static int REFRESH_DELAY_IN_SECONDS = 10;
+    public static int REFRESH_DELAY_IN_SECONDS = 5;
+
+    public static double POLAND_THE_WESTERNMOST_POINT_LATITUDE = 10;
+    public static double POLAND_THE_EASTERNMOST_POINT_LATITUDE = 30;
+    public static double POLAND_THE_NORTHERNMOST_POINT_LONGITUDE = 60;
+    public static double POLAND_THE_SOUTHERNMOST_POINT_LONGITUDE = 40;
 
     public static double LEFT_BORDER_LONGITUDE = -180;
-    public static double RIGHT_BORDER_LONGITUDE = +180;
-    public static double TOP_BORDER_LATITUDE = +90;
+    public static double RIGHT_BORDER_LONGITUDE = 180;
+    public static double TOP_BORDER_LATITUDE = 90;
     public static double BOTTOM_BORDER_LATITUDE = -90;
+
+    public static boolean USE_TEST_DATA = true;
 }

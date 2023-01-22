@@ -1,11 +1,14 @@
 package planes;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
-public class Plane {
+public class Plane extends PlaceableObject {
     private String icao24;
     private String callsign;
     private String origin_country;
@@ -19,7 +22,7 @@ public class Plane {
     private float true_track;
     private float vertical_rate;
     private int[] sensors;
-    private float geo_latitude;
+    private float geo_altitude;
     private String squawk;
     private boolean spi;
     private int position_source;
@@ -44,162 +47,95 @@ public class Plane {
 //        this.position_source=parseInt(planeFeatures[16]);
     }
 
+    public static List<Plane> get_newest_plane_list() {
+        ArrayList<String[]> list_of_planes;
+        try {
+            list_of_planes = get_data_about_planes_above_poland.refresh();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        List<Plane> modified_list_of_planes = new ArrayList<>();
+
+        for (String[] plane : list_of_planes) {
+            Plane modified_Plane = new Plane(plane);
+            modified_list_of_planes.add(modified_Plane);
+        }
+
+        return modified_list_of_planes;
+    }
+
     @Override
     public String toString() {
-        return "Plane{" +
-                "icao24='" + icao24 + '\'' +
-                ", callsign='" + callsign + '\'' +
-                ", origin_country='" + origin_country + '\'' +
-                ", time_position=" + time_position +
-                ", last_contact=" + last_contact +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", baro_altitude=" + baro_altitude +
-                ", on_ground=" + on_ground +
-                ", velocity=" + velocity +
-                ", true_track=" + true_track +
-                ", vertical_rate=" + vertical_rate +
-                ", sensors=" + Arrays.toString(sensors) +
-                ", geo_altitude=" + geo_latitude +
-                ", squawk='" + squawk + '\'' +
-                ", spi=" + spi +
-                ", position_source=" + position_source +
-                '}';
+        return "Plane{" + "icao24='" + icao24 + '\'' + ", callsign='" + callsign + '\'' + ", origin_country='" + origin_country + '\'' + ", time_position=" + time_position + ", last_contact=" + last_contact + ", longitude=" + longitude + ", latitude=" + latitude + ", baro_altitude=" + baro_altitude + ", on_ground=" + on_ground + ", velocity=" + velocity + ", true_track=" + true_track + ", vertical_rate=" + vertical_rate + ", sensors=" + Arrays.toString(sensors) + ", geo_altitude=" + geo_altitude + ", squawk='" + squawk + '\'' + ", spi=" + spi + ", position_source=" + position_source + '}';
     }
 
     public String getIcao24() {
         return icao24;
     }
 
-    public void setIcao24(String icao24) {
-        this.icao24 = icao24;
-    }
-
     public String getCallsign() {
         return callsign;
-    }
-
-    public void setCallsign(String callsign) {
-        this.callsign = callsign;
     }
 
     public String getOrigin_country() {
         return origin_country;
     }
 
-    public void setOrigin_country(String origin_country) {
-        this.origin_country = origin_country;
-    }
-
     public int getTime_position() {
         return time_position;
-    }
-
-    public void setTime_position(int time_position) {
-        this.time_position = time_position;
     }
 
     public int getLast_contact() {
         return last_contact;
     }
 
-    public void setLast_contact(int last_contact) {
-        this.last_contact = last_contact;
-    }
-
-    public float getLongitude() {
+    @Override
+    public double GetLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
-        this.longitude = longitude;
-    }
-
-    public float getLatitude() {
+    @Override
+    public double GetLatitude() {
         return latitude;
-    }
-
-    public void setLatitude(float latitude) {
-        this.latitude = latitude;
     }
 
     public float getBaro_altitude() {
         return baro_altitude;
     }
 
-    public void setBaro_altitude(float baro_altitude) {
-        this.baro_altitude = baro_altitude;
-    }
-
     public boolean isOn_ground() {
         return on_ground;
-    }
-
-    public void setOn_ground(boolean on_ground) {
-        this.on_ground = on_ground;
     }
 
     public float getVelocity() {
         return velocity;
     }
 
-    public void setVelocity(float velocity) {
-        this.velocity = velocity;
-    }
-
     public float getTrue_track() {
         return true_track;
-    }
-
-    public void setTrue_track(float true_track) {
-        this.true_track = true_track;
     }
 
     public float getVertical_rate() {
         return vertical_rate;
     }
 
-    public void setVertical_rate(float vertical_rate) {
-        this.vertical_rate = vertical_rate;
-    }
-
     public int[] getSensors() {
         return sensors;
     }
 
-    public void setSensors(int[] sensors) {
-        this.sensors = sensors;
-    }
-
-    public float getGeo_latitude() {
-        return geo_latitude;
-    }
-
-    public void setGeo_latitude(float geo_latitude) {
-        this.geo_latitude = geo_latitude;
+    public float getGeo_altitude() {
+        return geo_altitude;
     }
 
     public String getSquawk() {
         return squawk;
     }
 
-    public void setSquawk(String squawk) {
-        this.squawk = squawk;
-    }
-
     public boolean isSpi() {
         return spi;
     }
 
-    public void setSpi(boolean spi) {
-        this.spi = spi;
-    }
-
     public int getPosition_source() {
         return position_source;
-    }
-
-    public void setPosition_source(int position_source) {
-        this.position_source = position_source;
     }
 }
