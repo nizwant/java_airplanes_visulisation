@@ -42,4 +42,9 @@ public class Airport extends PlaceableObject {
     public String GetName() {
         return name;
     }
+
+    @Override
+    public String GetDataBeautified() {
+        return null;
+    }
 }

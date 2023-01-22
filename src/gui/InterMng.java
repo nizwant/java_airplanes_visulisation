@@ -6,9 +6,12 @@ import planes.Airport;
 import planes.PlaceableObject;
 import planes.Plane;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Color;
 
 import java.io.IOException;
 import java.util.List;
