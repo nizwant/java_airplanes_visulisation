@@ -1,12 +1,13 @@
 package gui;
 
 import constants.Constants;
+import interfaces.Pinnable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class MapOrganiser {
+public class MapOrganiser implements Pinnable {
     private final ImageWrapper _image;
     private final JLabel _map;
     private double _mapScale;
@@ -22,6 +23,7 @@ public class MapOrganiser {
         }
 
         _map = new JLabel();
+        _map.setName("MAP");
 
         this.ResetPosCalled();
     }
@@ -135,8 +137,9 @@ public class MapOrganiser {
         this.MapCalibration();
     }
 
-    public void PinMap(Container pCon) {
-        pCon.add(_map);
+    @Override
+    public void PinTo(Container pContainer) {
+        pContainer.add(_map);
     }
 
     public void DrawMap() {
@@ -164,5 +167,21 @@ public class MapOrganiser {
         if (_mapYPos < -deltaY) _mapYPos = -deltaY;
 
         if (_mapYPos > 0) _mapYPos = 0;
+    }
+
+    public int GetMapXPos() {
+        return _mapXPos;
+    }
+
+    public int GetMapYPos() {
+        return _mapYPos;
+    }
+
+    public int GetCurrentMapWidth() {
+        return _image.GetCurrentWidth();
+    }
+
+    public int GetCurrentMapHeight() {
+        return _image.GetCurrentHeight();
     }
 }

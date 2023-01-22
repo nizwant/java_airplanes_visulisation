@@ -1,10 +1,13 @@
 package planes;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Airport {
+
+public class Airport extends PlaceableObject {
+
     private double longitude;
     private double latitude;
     private String name;
@@ -15,10 +18,9 @@ public class Airport {
         this.name = name;
     }
 
-    public static List<Airport> get_airport_list(){
 
+    public static List<Airport> get_airport_list() {
         List<Airport> list_of_airports = new ArrayList<>();
-
 
         list_of_airports.add(new Airport(54.3775, 18.466389, "Gdańsk"));
         list_of_airports.add(new Airport(50.474444, 19.08, "Katowice"));
@@ -29,14 +31,17 @@ public class Airport {
         list_of_airports.add(new Airport(51.102778, 16.886111, "Wrocław"));
         list_of_airports.add(new Airport(50.077778, 19.785, "Kraków"));
 
-
         return list_of_airports;
     }
 
+
+    @Override
     public double GetLongitude() {
         return longitude;
     }
 
+
+    @Override
     public double GetLatitude() {
         return latitude;
     }
@@ -44,4 +49,5 @@ public class Airport {
     public String GetName() {
         return name;
     }
+
 }
