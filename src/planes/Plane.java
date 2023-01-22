@@ -37,13 +37,13 @@ public class Plane extends PlaceableObject {
         this.longitude = parseFloat(planeFeatures[5]);
         this.latitude = parseFloat(planeFeatures[6]);
         this.baro_altitude = planeFeatures[7];
-        this.on_ground=planeFeatures[8];
+        this.on_ground = planeFeatures[8];
         this.velocity = planeFeatures[9];
         this.true_track = parseFloat(planeFeatures[10]);
-        this.vertical_rate=planeFeatures[11];
+        this.vertical_rate = planeFeatures[11];
 //        this.sensors=null;
 //        this.geo_altitude=parseFloat(planeFeatures[13]);
-        this.squawk=planeFeatures[14];
+        this.squawk = planeFeatures[14];
 //        this.spi=Boolean.parseBoolean(planeFeatures[15]);
 //        this.position_source=parseInt(planeFeatures[16]);
     }
@@ -117,7 +117,7 @@ public class Plane extends PlaceableObject {
 
         if (Objects.equals(callsign, "")) {
             callsign_mess = "Samolot specjalny, dla bezpieczeństwa nie jest podane jak zwraca się do mnie wieża";
-        }else {
+        } else {
             callsign_mess = "Wieża kontrolna zwraca się do mnie " + callsign;
         }
 
@@ -126,42 +126,41 @@ public class Plane extends PlaceableObject {
 
         if (Objects.equals(on_ground, "null")) {
             on_ground_mess = "";
-        }else if (Objects.equals(on_ground, "true")){
+        } else if (Objects.equals(on_ground, "true")) {
             on_ground_mess = ", obecnie znajduje się na ziemii";
-        }else {
+        } else {
             on_ground_mess = ", jestem w powietrzu";
         }
 
         if (Objects.equals(baro_altitude, "null")) {
             baro_altitude_mess = "";
-        }else {
+        } else {
             baro_altitude_mess = ", na wysokości " + baro_altitude + " metrów";
         }
 
         if (Objects.equals(vertical_rate, "null")) {
             vertical_rate_mess = "";
-        }else if (Objects.equals(vertical_rate, "0")) {
+        } else if (Objects.equals(vertical_rate, "0")) {
             vertical_rate_mess = ", nie wznoszę się ani nie opadam";
-        }else if(parseFloat(vertical_rate) > 0) {
+        } else if (parseFloat(vertical_rate) > 0) {
             vertical_rate_mess = ", wznoszę się z prędkością " + vertical_rate + " metrów na sekunde";
-        }else {
+        } else {
             vertical_rate_mess = ", opadam z prędkością " + (-parseFloat(vertical_rate)) + " metrów na sekunde";
         }
 
         if (Objects.equals(velocity, "null")) {
             velocity_mess = "";
-        }else if(parseFloat(velocity) == 0) {
+        } else if (parseFloat(velocity) == 0) {
             velocity_mess = ", aktualnie stoję w miejscu, nigdzie się nie ruszam";
-        }else {
+        } else {
             velocity_mess = ", poruszam się z prędkością " + velocity + " metrów na sekunde";
         }
 
         if (Objects.equals(squawk, "null")) {
             squawk_mess = "";
-        }else{
+        } else {
             squawk_mess = ", do porozumiewania się z ziemią używam kanału o numerze " + squawk;
         }
-
 
 
         return callsign_mess + origin_country_mess + on_ground_mess + baro_altitude_mess + vertical_rate_mess + velocity_mess + squawk_mess;
