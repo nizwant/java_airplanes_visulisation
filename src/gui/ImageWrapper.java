@@ -4,6 +4,8 @@ import constants.Constants;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +48,21 @@ public class ImageWrapper {
         _currentImage = toBufferedImage(_originalImage.getScaledInstance(pNewWidth, pNewHeight, Constants.MAP_SCALING_ALGORITHM));
         _currentWidth = pNewWidth;
         _currentHeight = pNewHeight;
+    }
+
+    public ImageWrapper Rotate(double pAngle) {
+        // Rotation information
+        double rotationRequired = Math.toRadians(pAngle);
+        double locationX = _currentWidth / 2;
+        double locationY = _currentHeight / 2;
+
+        AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+
+        // Drawing the rotated image at the required drawing locations
+        _currentImage = op.filter(_currentImage, null);
+
+        return this;
     }
 
     public ImageWrapper Resize(int pNewWidth, int pNewHeight) {

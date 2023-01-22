@@ -1,9 +1,12 @@
 package planes;
 
+import constants.Constants;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
@@ -112,7 +115,8 @@ public class Plane extends PlaceableObject {
     }
 
     public float getTrue_track() {
-        return true_track;
+        if (Constants.USE_TEST_DATA) return (float) ThreadLocalRandom.current().nextInt(0, 360 + 1);
+        else return true_track;
     }
 
     public float getVertical_rate() {
