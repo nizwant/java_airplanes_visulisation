@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static java.lang.Float.parseFloat;
@@ -19,11 +20,11 @@ public class Plane extends PlaceableObject {
     private int last_contact;
     private float longitude;
     private float latitude;
-    private float baro_altitude;
-    private boolean on_ground;
-    private float velocity;
+    private String baro_altitude;
+    private String on_ground;
+    private String velocity;
     private float true_track;
-    private float vertical_rate;
+    private String vertical_rate;
     private int[] sensors;
     private float geo_altitude;
     private String squawk;
@@ -38,14 +39,14 @@ public class Plane extends PlaceableObject {
         this.last_contact = parseInt(planeFeatures[4]);
         this.longitude = parseFloat(planeFeatures[5]);
         this.latitude = parseFloat(planeFeatures[6]);
-//        this.baro_altitude=parseFloat(planeFeatures[7]);
-//        this.on_ground=Boolean.parseBoolean(planeFeatures[8]);
-        this.velocity = parseFloat(planeFeatures[9]);
+        this.baro_altitude = planeFeatures[7];
+        this.on_ground=planeFeatures[8];
+        this.velocity = planeFeatures[9];
         this.true_track = parseFloat(planeFeatures[10]);
-//        this.vertical_rate=parseFloat(planeFeatures[11]);
+        this.vertical_rate=planeFeatures[11];
 //        this.sensors=null;
 //        this.geo_altitude=parseFloat(planeFeatures[13]);
-//        this.squawk=planeFeatures[14];
+        this.squawk=planeFeatures[14];
 //        this.spi=Boolean.parseBoolean(planeFeatures[15]);
 //        this.position_source=parseInt(planeFeatures[16]);
     }
@@ -104,34 +105,71 @@ public class Plane extends PlaceableObject {
 
     @Override
     public String GetName() {
-        return null;
+        return icao24;
     }
 
     @Override
     public String GetDataBeautified() {
-        return null;
+        String callsign_mess;
+        String on_ground_mess;
+        String baro_altitude_mess;
+        String vertical_rate_mess;
+        String velocity_mess;
+        String squawk_mess;
+
+        if (Objects.equals(callsign, "")) {
+            callsign_mess = "Samolot specjalny, dla bezpieczeństwa nie jest podane jak zwraca się do mnie wieża";
+        }else {
+            callsign_mess = "Wieża kontrolna zwraca się do mnie " + callsign;
+        }
+
+        if (Objects.equals(on_ground, "null")) {
+            on_ground_mess = "";
+        }else if (Objects.equals(on_ground, "true")){
+            on_ground_mess = ", obecnie znajduje się na ziemii";
+        }else {
+            on_ground_mess = ", jestem w powietrzu";
+        }
+
+        if (Objects.equals(baro_altitude, "null")) {
+            baro_altitude_mess = "";
+        }else {
+            baro_altitude_mess = ", na wysokości " + baro_altitude + " metrów";
+        }
+
+        if (Objects.equals(vertical_rate, "null")) {
+            vertical_rate_mess = "";
+        }else if (Objects.equals(vertical_rate, "0")) {
+            vertical_rate_mess = ", nie wznoszę się ani nie opadam";
+        }else if(parseFloat(vertical_rate) > 0) {
+            vertical_rate_mess = ", wznoszę się z prędkością " + vertical_rate + " metrów na sekunde";
+        }else {
+            vertical_rate_mess = ", opadam z prędkością " + (-parseFloat(vertical_rate)) + " metrów na sekunde";
+        }
+
+        if (Objects.equals(velocity, "null")) {
+            velocity_mess = "";
+        }else if(parseFloat(velocity) == 0) {
+            velocity_mess = ", aktualnie stoję w miejscu, nigdzie się nie ruszam";
+        }else {
+            velocity_mess = ", poruszam się z prędkością " + velocity + " metrów na sekunde";
+        }
+
+        if (Objects.equals(squawk, "null")) {
+            squawk_mess = "";
+        }else{
+            squawk_mess = ", do porozumiewania się z ziemią używam kanału o numerze " + squawk;
+        }
+
+        return callsign_mess + on_ground_mess + baro_altitude_mess + vertical_rate_mess + velocity_mess + squawk_mess;
     }
 
-    public float getBaro_altitude() {
-        return baro_altitude;
-    }
-
-    public boolean isOn_ground() {
-        return on_ground;
-    }
-
-    public float getVelocity() {
-        return velocity;
-    }
 
     public float getTrue_track() {
         if (Constants.USE_TEST_DATA) return (float) ThreadLocalRandom.current().nextInt(0, 360 + 1);
         else return true_track;
     }
 
-    public float getVertical_rate() {
-        return vertical_rate;
-    }
 
     public int[] getSensors() {
         return sensors;

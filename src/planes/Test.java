@@ -11,15 +11,16 @@ public class Test {
         List<Plane> modified_list_of_planes = new ArrayList<>();
 
         for (String[] plane : list_of_planes) {
-            System.out.println(Arrays.toString(plane));
+//            System.out.println(Arrays.toString(plane));
             Plane modified_Plane = new Plane(plane);
             modified_list_of_planes.add(modified_Plane);
         }
 
         for (Plane modPlane : modified_list_of_planes) {
-            System.out.println(modPlane);
-            System.out.println(modPlane.GetLatitude() + 5);
-            System.out.println(modPlane.getOrigin_country());
+//            System.out.println(modPlane);
+//            System.out.println(modPlane.GetLatitude() + 5);
+//            System.out.println(modPlane.getOrigin_country());
+            System.out.println(modPlane.GetDataBeautified());
         }
     }
 }
