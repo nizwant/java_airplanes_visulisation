@@ -1,13 +1,17 @@
 package gui;
 
 import constants.Constants;
+import gui.interactable.InteractableObject;
 import planes.Airport;
 import planes.PlaceableObject;
 import planes.Plane;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Color;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,12 +35,13 @@ public class InterMng {
 
     private void AddToPanel(List<? extends PlaceableObject> pPlaceableObjects) {
         for (var obj : pPlaceableObjects) {
-            JRadioButton radio = new JRadioButton();
-            radio.setSize(new Dimension(Constants.PLANE_RADIO_BUTTON_WIDTH, Constants.PLANE_RADIO_BUTTON_HEIGHT));
-            if (Constants.USE_BG_FOR_PLANES_AND_AIRPORTS) radio.setBackground(new Color(0x123456));
-            else radio.setOpaque(false);
-            radio.setHorizontalAlignment(SwingConstants.CENTER);
-            radio.setVerticalAlignment(SwingConstants.CENTER);
+            InteractableObject btn = new InteractableObject(obj);
+
+            btn.setSize(new Dimension(Constants.INTERACTABLE_OBJECT_BUTTON_WIDTH, Constants.INTERACTABLE_OBJECT_BUTTON_HEIGHT));
+            if (Constants.USE_BG_FOR_PLANES_AND_AIRPORTS) btn.setBackground(new Color(0x123456));
+            else btn.setOpaque(false);
+            btn.setHorizontalAlignment(SwingConstants.CENTER);
+            btn.setVerticalAlignment(SwingConstants.CENTER);
 
             // setting icon
             ImageWrapper img;
@@ -51,9 +56,9 @@ public class InterMng {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            img.Resize((int) ((double) Constants.PLANE_RADIO_BUTTON_WIDTH / 2 * 1.5), (int) ((double) Constants.PLANE_RADIO_BUTTON_HEIGHT / 2 * 1.5));
+            img.Resize((int) ((double) Constants.INTERACTABLE_OBJECT_BUTTON_WIDTH / 2 * 1.5), (int) ((double) Constants.INTERACTABLE_OBJECT_BUTTON_HEIGHT / 2 * 1.5));
             if (obj instanceof Plane) img.Rotate(((Plane) obj).getTrue_track());
-            radio.setIcon(new ImageIcon(img.GetCurrentImage()));
+            btn.setIcon(new ImageIcon(img.GetCurrentImage()));
 
             // setting position
             int posX, posY;
@@ -73,9 +78,11 @@ public class InterMng {
             posX = (int) ((obj.GetLongitude() - lb) / (rb - lb) * _panel.getWidth());
             posY = (int) ((tb - obj.GetLatitude()) / (tb - bb) * _panel.getHeight());
 
-            radio.setBounds(posX, posY, radio.getWidth(), radio.getHeight());
+            btn.setBounds(posX, posY, btn.getWidth(), btn.getHeight());
 
-            _panel.add(radio);
+            btn.addActionListener(InteractableObject::ProcessEvent);
+
+            _panel.add(btn);
         }
     }
 
