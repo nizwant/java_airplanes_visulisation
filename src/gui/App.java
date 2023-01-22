@@ -93,7 +93,7 @@ public class App extends JFrame implements ActionListener {
         _navigationGroup.setSize(new Dimension(Constants.BUTTON_WIDTH * 3, Constants.BUTTON_HEIGHT * 6));
         ComponentPlacement.PlaceComponentSmart(_navigationGroup, PlainLayout.RIGHT, PlainLayout.TOP);
         _navigationGroup.setLayout(null);
-        _navigationGroup.setBackground(Constants.TRANSPARENT);
+        _navigationGroup.setOpaque(false);
 
         _navigationGroup.setName("NAVIGATION_GROUP");
 

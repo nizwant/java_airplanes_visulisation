@@ -17,7 +17,8 @@ public class MapOrganiser implements Pinnable {
 
     public MapOrganiser() {
         try {
-            _image = new ImageWrapper(Constants.RESOURCES_PATH + "/satellite.png");
+
+            _image = new ImageWrapper(Constants.RESOURCES_PATH + "/" + Constants.MAP_NAME);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
