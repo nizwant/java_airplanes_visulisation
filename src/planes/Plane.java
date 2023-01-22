@@ -3,10 +3,7 @@ package planes;
 import constants.Constants;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static java.lang.Float.parseFloat;
@@ -111,6 +108,7 @@ public class Plane extends PlaceableObject {
     @Override
     public String GetDataBeautified() {
         String callsign_mess;
+        String origin_country_mess;
         String on_ground_mess;
         String baro_altitude_mess;
         String vertical_rate_mess;
@@ -122,6 +120,9 @@ public class Plane extends PlaceableObject {
         }else {
             callsign_mess = "Wieża kontrolna zwraca się do mnie " + callsign;
         }
+
+        CountryCodes pom = new CountryCodes();
+        origin_country_mess = ", kraj mojego pochodzenia to " + pom.getCode(origin_country);
 
         if (Objects.equals(on_ground, "null")) {
             on_ground_mess = "";
@@ -161,7 +162,9 @@ public class Plane extends PlaceableObject {
             squawk_mess = ", do porozumiewania się z ziemią używam kanału o numerze " + squawk;
         }
 
-        return callsign_mess + on_ground_mess + baro_altitude_mess + vertical_rate_mess + velocity_mess + squawk_mess;
+
+
+        return callsign_mess + origin_country_mess + on_ground_mess + baro_altitude_mess + vertical_rate_mess + velocity_mess + squawk_mess;
     }
 
 

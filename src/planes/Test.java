@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class Test {
     public static void main(String[] args) throws IOException {
@@ -22,5 +23,6 @@ public class Test {
 //            System.out.println(modPlane.getOrigin_country());
             System.out.println(modPlane.GetDataBeautified());
         }
+
     }
 }
