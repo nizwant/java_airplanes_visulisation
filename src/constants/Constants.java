@@ -24,8 +24,8 @@ public class Constants {
 
     public static boolean USE_TEST_DATA = true;
 
-    public static int PLANE_RADIO_BUTTON_WIDTH = 50;
-    public static int PLANE_RADIO_BUTTON_HEIGHT = 50;
+    public static int INTERACTABLE_OBJECT_BUTTON_WIDTH = 50;
+    public static int INTERACTABLE_OBJECT_BUTTON_HEIGHT = 50;
     public static boolean USE_BG_FOR_PLANES_AND_AIRPORTS = false;
 
     public static double POLAND_THE_WESTERNMOST_POINT_LONGITUDE = 10;
