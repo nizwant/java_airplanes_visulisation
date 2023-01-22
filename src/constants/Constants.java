@@ -18,7 +18,7 @@ public class Constants {
     public static int ZOOM_IN_COUNT_LIMIT = 5;
 
     public static String RESOURCES_PATH = "./resources";
-    public static String MAP_NAME = "map@pic.jpg";
+    public static String MAP_NAME = "mapa.png";
 
     public static int REFRESH_DELAY_IN_SECONDS = 5;
 
