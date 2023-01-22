@@ -8,7 +8,7 @@ public class Airport extends PlaceableObject {
     private double latitude;
     private String name;
 
-    public Airport(double longitude, double latitude, String name) {
+    public Airport(double latitude, double longitude, String name) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.name = name;
