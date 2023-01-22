@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Base64;
+import constants.API_credentials;
+
 
 public class get_data_about_planes_above_poland {
     public static ArrayList<String[]> refresh() throws IOException {
@@ -13,6 +16,12 @@ public class get_data_about_planes_above_poland {
         URL url = new URL("https://opensky-network.org/api/states/all?lamin=49.0273953314&lomin=14.0745211117&lamax=54.8515359564&lomax=24.0299857927");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
+
+        String userpass = API_credentials.username + ":" + API_credentials.password;
+        String basicAuth = new String(Base64.getEncoder().encode(userpass.getBytes()));
+        con.setRequestProperty("Authorization", "Basic " + basicAuth);
+
+
         BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuilder stringbuilder = new StringBuilder();

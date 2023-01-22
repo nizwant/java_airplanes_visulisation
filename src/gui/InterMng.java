@@ -39,7 +39,11 @@ public class InterMng {
 
             btn.setSize(new Dimension(Constants.INTERACTABLE_OBJECT_BUTTON_WIDTH, Constants.INTERACTABLE_OBJECT_BUTTON_HEIGHT));
             if (Constants.USE_BG_FOR_PLANES_AND_AIRPORTS) btn.setBackground(new Color(0x123456));
-            else btn.setOpaque(false);
+            else {
+                btn.setOpaque(false);
+                btn.setContentAreaFilled(false);
+                btn.setBorderPainted(false);
+            }
             btn.setHorizontalAlignment(SwingConstants.CENTER);
             btn.setVerticalAlignment(SwingConstants.CENTER);
 
