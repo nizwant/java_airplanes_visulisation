@@ -7,9 +7,9 @@ import planes.Plane;
 
 import javax.swing.*;
 
-import java.awt.Dimension;
-import java.awt.Color;
+import java.awt.*;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -45,7 +45,7 @@ public class InterMng {
             try {
                 String filename = "";
                 if (obj instanceof Plane) {
-                    filename = "/plane@icon.png";
+                    filename = "/plane2@icon.png";
                 } else if (obj instanceof Airport) {
                     filename = "/airport@icon.png";
                 }
@@ -53,7 +53,9 @@ public class InterMng {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            radio.setIcon(new ImageIcon(img.Resize((int) ((double) Constants.PLANE_RADIO_BUTTON_WIDTH / 2 * 1.5), (int) ((double) Constants.PLANE_RADIO_BUTTON_HEIGHT / 2 * 1.5)).GetCurrentImage()));
+            img.Resize((int) ((double) Constants.PLANE_RADIO_BUTTON_WIDTH / 2 * 1.5), (int) ((double) Constants.PLANE_RADIO_BUTTON_HEIGHT / 2 * 1.5));
+            if (obj instanceof Plane) img.Rotate(((Plane) obj).getTrue_track());
+            radio.setIcon(new ImageIcon(img.GetCurrentImage()));
 
             // setting position
             int posX, posY;

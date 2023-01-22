@@ -9,8 +9,6 @@ public class Constants {
     public static int BUTTON_WIDTH = 50;
     public static int BUTTON_HEIGHT = 50;
 
-    public static Color TRANSPARENT = new Color(0, 0, 0, 0);
-
     public static double SCALE_BOOST = 50; // %
     public static int MAP_MOVE_STEP = 100; // flat
     public static int MAP_SCALING_ALGORITHM = Image.SCALE_DEFAULT;
@@ -20,6 +18,7 @@ public class Constants {
     public static int ZOOM_IN_COUNT_LIMIT = 5;
 
     public static String RESOURCES_PATH = "./resources";
+    public static String MAP_NAME = "map@pic.jpg";
 
     public static int REFRESH_DELAY_IN_SECONDS = 5;
 
@@ -40,5 +39,4 @@ public class Constants {
     public static double BOTTOM_BORDER_LATITUDE = -90;
 
     public static boolean USER_POLAND_S_MAP_BOUNDS = false;
-
 }
