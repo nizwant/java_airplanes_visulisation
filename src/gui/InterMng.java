@@ -43,7 +43,9 @@ public class InterMng {
                 btn.setOpaque(false);
                 btn.setContentAreaFilled(false);
                 btn.setBorderPainted(false);
-            }
+
+            };
+
             btn.setHorizontalAlignment(SwingConstants.CENTER);
             btn.setVerticalAlignment(SwingConstants.CENTER);
 

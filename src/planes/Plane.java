@@ -134,8 +134,9 @@ public class Plane extends PlaceableObject {
 
         if (Objects.equals(baro_altitude, "null")) {
             baro_altitude_mess = "";
-        } else {
-            baro_altitude_mess = ", na wysokości " + baro_altitude + " metrów";
+
+        }else {
+            baro_altitude_mess = ", na wysokości " + (Math.abs(parseFloat(baro_altitude))) + " metrów";
         }
 
         if (Objects.equals(vertical_rate, "null")) {

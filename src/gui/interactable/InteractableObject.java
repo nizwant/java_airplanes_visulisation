@@ -39,14 +39,14 @@ public class InteractableObject extends JButton {
         // get content pane reference
         var contentPane = frame.getContentPane();
         // set its size
-        contentPane.setPreferredSize(new Dimension(400, 300));
+        contentPane.setPreferredSize(new Dimension(400, 130));
         // set its position
         contentPane.setBounds(0, 0, contentPane.getWidth(), contentPane.getHeight());
 
         // create label
         JLabel label = new JLabel();
         // set inner text
-        label.setText(src._data.GetDataBeautified());
+        label.setText("<html>"+ src._data.GetDataBeautified() +"</html>");
 
         // add text to content pane
         contentPane.add(label);
