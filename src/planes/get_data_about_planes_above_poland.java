@@ -1,6 +1,7 @@
 package planes;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -17,6 +18,11 @@ public class get_data_about_planes_above_poland {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
 
+        // if code doesn't work it is probably because there is no API_credentials file in constants dir
+        // it has the same structure as API_credentials_example
+        // username and password are obtained from https://opensky-network.org/index.php?option=com_users&view=registration
+
+        // if you don't want to deal with it you can just comment next 3 lines and "import constants.API_credentials;"
         String userpass = API_credentials.username + ":" + API_credentials.password;
         String basicAuth = new String(Base64.getEncoder().encode(userpass.getBytes()));
         con.setRequestProperty("Authorization", "Basic " + basicAuth);
